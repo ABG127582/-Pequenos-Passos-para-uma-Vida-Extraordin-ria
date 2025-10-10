@@ -1,0 +1,85 @@
+<div class="page-container" id="page-planejamento-diario">
+    <div class="container">
+        <header class="daily-plan-header">
+            <h1>Planejamento Diário</h1>
+            <div class="daily-plan-controls">
+                <input type="date" id="daily-plan-date">
+                <div id="daily-progress-container" class="progress-ring-container" title="Progresso das tarefas concluídas">
+                    <svg id="daily-progress-ring" width="50" height="50" viewBox="0 0 120 120">
+                        <circle class="progress-ring-bg" cx="60" cy="60" r="54"/>
+                        <circle class="progress-ring-fg" cx="60" cy="60" r="54" pathLength="100"/>
+                        <text id="progress-ring-text" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle">0%</text>
+                    </svg>
+                </div>
+            </div>
+        </header>
+
+        <main class="daily-plan-layout">
+            <section id="daily-schedule-section" class="content-section">
+                <h2 class="section-title">Horário do Dia</h2>
+                <div id="schedule-container">
+                    <ul id="schedule-hours-list">
+                        <!-- Horas e tarefas serão renderizadas aqui pelo JS -->
+                    </ul>
+                </div>
+                 <div id="add-event-btn-container">
+                    <button id="add-event-btn" class="standard-button"><i class="fas fa-plus"></i> Adicionar Evento</button>
+                </div>
+            </section>
+        </main>
+        
+        <div class="back-button-wrapper">
+            <button class="standard-button back-button" data-page="inicio"><i class="fas fa-arrow-left"></i> Voltar ao Início</button>
+        </div>
+    </div>
+</div>
+
+<!-- Add/Edit Schedule Task Modal -->
+<div id="schedule-task-modal" class="modal-container" style="display: none;" role="dialog" aria-modal="true" aria-labelledby="schedule-task-modal-title">
+    <div class="modal-content">
+        <header class="modal-header">
+            <h2 id="schedule-task-modal-title">Adicionar Evento</h2>
+            <button id="schedule-task-modal-close-btn" class="modal-close-button" aria-label="Fechar"><i class="fas fa-times"></i></button>
+        </header>
+        <div class="modal-body">
+            <form id="schedule-task-form">
+                <div class="form-group">
+                    <label for="task-description-input">Descrição:</label>
+                    <div class="input-wrapper textarea-wrapper">
+                        <textarea id="task-description-input" required rows="3"></textarea>
+                        <button type="button" class="speech-to-text-btn" title="Digitar por Voz"><i class="fas fa-microphone"></i></button>
+                    </div>
+                </div>
+                <div class="form-group" style="display: flex; gap: 15px;">
+                    <div style="flex: 1;">
+                        <label for="task-start-time-input">Início:</label>
+                        <input type="time" id="task-start-time-input" required step="900">
+                    </div>
+                    <div style="flex: 1;">
+                        <label for="task-end-time-input">Fim:</label>
+                        <input type="time" id="task-end-time-input" required step="900">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="task-category-select">Categoria:</label>
+                    <select id="task-category-select" required>
+                        <option value="Pessoal">Pessoal</option>
+                        <option value="Física">Física</option>
+                        <option value="Mental">Mental</option>
+                        <option value="Financeira">Financeira</option>
+                        <option value="Familiar">Familiar</option>
+                        <option value="Profissional">Profissional</option>
+                        <option value="Social">Social</option>
+                        <option value="Espiritual">Espiritual</option>
+                        <option value="Preventiva">Preventiva</option>
+                    </select>
+                </div>
+            </form>
+        </div>
+        <footer class="modal-footer">
+            <button id="delete-task-btn" type="button" class="standard-button-danger" style="margin-right: auto; display: none;">Excluir</button>
+            <button id="schedule-task-modal-cancel-btn" type="button" class="standard-button-secondary">Cancelar</button>
+            <button id="save-task-btn" type="submit" form="schedule-task-form" class="standard-button">Salvar</button>
+        </footer>
+    </div>
+</div>

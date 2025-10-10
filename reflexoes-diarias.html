@@ -1,0 +1,166 @@
+<div class="page-section" id="page-reflexoes-diarias">
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-lightbulb" style="margin-right: 10px;"></i> Diário de Reflexões</h1>
+        </header>
+        <main>
+            <section class="content-section">
+                <div class="reflexoes-controls">
+                    <div class="reflexoes-filter-group">
+                        <label for="reflexoes-search-input">Buscar:</label>
+                        <input type="search" id="reflexoes-search-input" placeholder="Filtrar por palavra-chave...">
+                    </div>
+                    <div class="reflexoes-filter-group">
+                        <label for="reflexoes-category-filter">Categoria:</label>
+                        <select id="reflexoes-category-filter">
+                            <option value="all">Todas</option>
+                            <!-- Options will be populated by JS -->
+                        </select>
+                    </div>
+                    <div class="reflexoes-filter-group">
+                        <label for="reflexoes-date-filter">Período:</label>
+                        <select id="reflexoes-date-filter">
+                            <option value="all">Todo o período</option>
+                            <option value="today">Hoje</option>
+                            <option value="week">Últimos 7 dias</option>
+                            <option value="month">Últimos 30 dias</option>
+                        </select>
+                    </div>
+                    <div class="reflexoes-filter-group">
+                        <label for="reflexoes-sort-filter">Ordenar por:</label>
+                        <select id="reflexoes-sort-filter">
+                            <option value="desc">Mais recentes</option>
+                            <option value="asc">Mais antigas</option>
+                        </select>
+                    </div>
+                    <div class="reflexoes-view-toggle">
+                        <button id="list-view-btn" class="view-btn active" aria-pressed="true" title="Visualização em Lista"><i class="fas fa-bars"></i></button>
+                        <button id="grid-view-btn" class="view-btn" aria-pressed="false" title="Visualização em Grade"><i class="fas fa-grip"></i></button>
+                    </div>
+                </div>
+
+                <div id="reflexoes-list-container">
+                    <!-- Reflections will be rendered here by JS -->
+                </div>
+
+                <div id="reflexoes-empty-state" class="empty-list-placeholder" style="display: none;">
+                    <p>Nenhuma reflexão encontrada. Comece a registrar seus pensamentos nas páginas de saúde!</p>
+                </div>
+            </section>
+        </main>
+        <div class="back-button-wrapper">
+            <button class="standard-button back-button" data-page="inicio"><i class="fas fa-arrow-left"></i> Voltar ao Início</button>
+        </div>
+    </div>
+</div>
+
+<style>
+    .reflexoes-controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        align-items: flex-end;
+    }
+    .reflexoes-filter-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        min-width: 150px;
+    }
+    .reflexoes-filter-group label {
+        font-weight: 600;
+        font-size: 0.9rem;
+    }
+    .reflexoes-filter-group input,
+    .reflexoes-filter-group select {
+        padding: 0.5rem;
+        border-radius: var(--card-border-radius);
+        border: 1px solid var(--border-color);
+        background-color: var(--card-background-color);
+        color: var(--text-color);
+        font-size: 0.9rem;
+    }
+    #reflexoes-search-input {
+        flex-grow: 1;
+    }
+    .reflexoes-view-toggle {
+        display: flex;
+        border: 1px solid var(--border-color);
+        border-radius: var(--card-border-radius);
+        overflow: hidden;
+    }
+    .reflexoes-view-toggle .view-btn {
+        background: transparent;
+        border: none;
+        padding: 0.5rem 0.75rem;
+        cursor: pointer;
+        color: var(--text-color-muted);
+    }
+    .reflexoes-view-toggle .view-btn.active {
+        background-color: var(--color-primary);
+        color: var(--text-color-light);
+    }
+
+
+    #reflexoes-list-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        transition: grid-template-columns 0.3s ease;
+    }
+    #reflexoes-list-container.grid-view {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    }
+
+
+    .reflection-card-item {
+        background-color: var(--card-background-color);
+        border: 1px solid var(--border-color);
+        border-left-width: 5px;
+        border-radius: var(--card-border-radius);
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+
+    .reflection-card-item.fade-out {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+
+    .reflection-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .reflection-card-category {
+        font-weight: bold;
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.8rem;
+        color: var(--text-color-light);
+    }
+    .reflection-card-date {
+        font-size: 0.85rem;
+        color: var(--text-color-muted);
+    }
+    .reflection-card-body p {
+        margin: 0;
+        line-height: 1.6;
+        white-space: pre-wrap; /* Preserve line breaks from textarea */
+    }
+     .reflection-card-body .reflection-title {
+        font-weight: 600;
+        color: var(--text-color);
+        margin-bottom: 0.5rem;
+        display: block;
+    }
+    .reflection-card-actions {
+        align-self: flex-end;
+    }
+</style>
